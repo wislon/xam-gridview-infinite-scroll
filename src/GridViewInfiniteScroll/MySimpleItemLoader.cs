@@ -3,16 +3,16 @@ using System.Text;
 
 namespace GridViewInfiniteScroll
 {
-  public class SimpleItemLoader
+  public class MySimpleItemLoader
   {
-    public List<SimpleItem> SimpleItems { get; set; }
+    public List<MySimpleItem> MySimpleItems { get; private set; }
     public bool CanLoadMoreItems { get; private set; }
     public bool IsBusy { get; set; }
     public int CurrentPageValue { get; set; }
 
-    public SimpleItemLoader()
+    public MySimpleItemLoader()
     {
-      SimpleItems = new List<SimpleItem>();
+      MySimpleItems = new List<MySimpleItem>();
     }
 
     public void LoadMoreItems(int itemsPerPage)
@@ -20,11 +20,11 @@ namespace GridViewInfiniteScroll
       IsBusy = true;
       for (int i = CurrentPageValue; i < CurrentPageValue + itemsPerPage; i++)
       {
-        SimpleItems.Add(new SimpleItem(){DisplayName = string.Format("This is item {0:0000}", i)});
+        MySimpleItems.Add(new MySimpleItem(){DisplayName = string.Format("This is item {0:0000}", i)});
       }
       // normally you'd check to see if the number of items returned is less than the number requested, i.e. you've run out, and then set this accordinly.
       CanLoadMoreItems = true;
-      CurrentPageValue = SimpleItems.Count;
+      CurrentPageValue = MySimpleItems.Count;
       IsBusy = false;
     }
   }

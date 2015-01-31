@@ -4,22 +4,22 @@ using Android.Widget;
 
 namespace GridViewInfiniteScroll
 {
-  public class MyGridViewAdapter : BaseAdapter<SimpleItem>
+  public class MyGridViewAdapter : BaseAdapter<MySimpleItem>
   {
-    private readonly SimpleItemLoader _simpleItemLoader;
+    private readonly MySimpleItemLoader _mySimpleItemLoader;
     private readonly Context _context;
 
-    public MyGridViewAdapter(Context context, SimpleItemLoader simpleItemLoader)
+    public MyGridViewAdapter(Context context, MySimpleItemLoader mySimpleItemLoader)
     {
       _context = context;
-      _simpleItemLoader = simpleItemLoader;
+      _mySimpleItemLoader = mySimpleItemLoader;
     }
 
     public override View GetView(int position, View convertView, ViewGroup parent)
     {
-      var item = _simpleItemLoader.SimpleItems[position];
+      var item = _mySimpleItemLoader.MySimpleItems[position];
 
-      View itemView = convertView ?? LayoutInflater.From(_context).Inflate(Resource.Layout.GridViewCell, parent, false);
+      View itemView = convertView ?? LayoutInflater.From(_context).Inflate(Resource.Layout.MyGridViewCell, parent, false);
       var tvDisplayName = itemView.FindViewById<TextView>(Resource.Id.tvDisplayName);
       var imgThumbail = itemView.FindViewById<ImageView>(Resource.Id.imgThumbnail);
 
@@ -40,12 +40,12 @@ namespace GridViewInfiniteScroll
 
     public override int Count
     {
-      get { return _simpleItemLoader.SimpleItems.Count; }
+      get { return _mySimpleItemLoader.MySimpleItems.Count; }
     }
 
-    public override SimpleItem this[int position]
+    public override MySimpleItem this[int position]
     {
-      get { return _simpleItemLoader.SimpleItems[position]; }
+      get { return _mySimpleItemLoader.MySimpleItems[position]; }
     }
   }
 }

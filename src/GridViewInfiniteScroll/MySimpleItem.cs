@@ -1,6 +1,6 @@
 ﻿namespace GridViewInfiniteScroll
 {
-  public class SimpleItem
+  public class MySimpleItem
   {
     public string DisplayName { get; set; }
   }

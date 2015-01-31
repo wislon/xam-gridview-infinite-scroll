@@ -1,9 +1,5 @@
-﻿using System;
-using Android.App;
-using Android.Content;
-using Android.Runtime;
+﻿using Android.App;
 using Android.Util;
-using Android.Views;
 using Android.Widget;
 using Android.OS;
 
@@ -15,7 +11,7 @@ namespace GridViewInfiniteScroll
     private const string TAG = "InfiniteScroll";
 
     private GridView _gridView;
-    private SimpleItemLoader _simpleItemLoader;
+    private MySimpleItemLoader _mySimpleItemLoader;
     private MyGridViewAdapter _gridviewAdapter;
     private readonly object _scrollLockObject = new object();
     private const int ItemsPerPage = 24;
@@ -34,11 +30,11 @@ namespace GridViewInfiniteScroll
 
     private void SetupUiElements()
     {
-      _simpleItemLoader = new SimpleItemLoader();
-      _simpleItemLoader.LoadMoreItems(ItemsPerPage); 
+      _mySimpleItemLoader = new MySimpleItemLoader();
+      _mySimpleItemLoader.LoadMoreItems(ItemsPerPage); 
 
       _gridView = FindViewById<GridView>(Resource.Id.gridView);
-      _gridviewAdapter = new MyGridViewAdapter(this, _simpleItemLoader);
+      _gridviewAdapter = new MyGridViewAdapter(this, _mySimpleItemLoader);
       _gridView.Adapter = _gridviewAdapter;
       _gridView.Scroll += KeepScrollingInfinitely;
     }
@@ -48,11 +44,11 @@ namespace GridViewInfiniteScroll
       lock (_scrollLockObject)
       {
         var mustLoadMore = args.FirstVisibleItem + args.VisibleItemCount >= args.TotalItemCount - LoadNextItemsThreshold;
-        if (mustLoadMore && _simpleItemLoader.CanLoadMoreItems && !_simpleItemLoader.IsBusy)
+        if (mustLoadMore && _mySimpleItemLoader.CanLoadMoreItems && !_mySimpleItemLoader.IsBusy)
         {
-          _simpleItemLoader.IsBusy = true;
+          _mySimpleItemLoader.IsBusy = true;
           Log.Info(TAG, "Requested to load more items");
-          _simpleItemLoader.LoadMoreItems(ItemsPerPage);
+          _mySimpleItemLoader.LoadMoreItems(ItemsPerPage);
           _gridviewAdapter.NotifyDataSetChanged();
           _gridView.InvalidateViews();
         }
