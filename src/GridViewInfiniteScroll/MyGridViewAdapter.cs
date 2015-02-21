@@ -17,7 +17,7 @@ namespace GridViewInfiniteScroll
 
     public override View GetView(int position, View convertView, ViewGroup parent)
     {
-      var item = _mySimpleItemLoader.MySimpleItems[position];
+      var dataItem = _mySimpleItemLoader.MySimpleItems[position];
 
       View itemView = convertView;
       MySimpleItemViewHolder viewHolder;
@@ -41,7 +41,7 @@ namespace GridViewInfiniteScroll
         itemView.Tag = viewHolder;
       }
 
-      viewHolder.DisplayName.Text = item.DisplayName;
+      viewHolder.DisplayName.Text = dataItem.DisplayName;
       viewHolder.Thumbnail.SetImageResource(Resource.Drawable.Icon);
       return itemView;
     }
