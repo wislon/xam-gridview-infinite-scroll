@@ -19,19 +19,32 @@ namespace GridViewInfiniteScroll
     {
       var item = _mySimpleItemLoader.MySimpleItems[position];
 
-      View itemView = convertView ?? LayoutInflater.From(_context).Inflate(Resource.Layout.MyGridViewCell, parent, false);
-      var tvDisplayName = itemView.FindViewById<TextView>(Resource.Id.tvDisplayName);
-      var imgThumbail = itemView.FindViewById<ImageView>(Resource.Id.imgThumbnail);
+      View itemView = convertView;
+      MySimpleItemViewHolder viewHolder;
 
-      imgThumbail.SetScaleType(ImageView.ScaleType.CenterCrop);
-      imgThumbail.SetPadding(8, 8, 8, 8);
+      if (itemView != null)
+      {
+        viewHolder = (MySimpleItemViewHolder)itemView.Tag;
+      }
+      else
+      {
+        viewHolder = new MySimpleItemViewHolder();
+        itemView = LayoutInflater.From(_context).Inflate(Resource.Layout.MyGridViewCell, parent, false);
 
-      tvDisplayName.Text = item.DisplayName;
-      imgThumbail.SetImageResource(Resource.Drawable.Icon);
+        var imgThumbail = itemView.FindViewById<ImageView>(Resource.Id.imgThumbnail);
+        imgThumbail.SetScaleType(ImageView.ScaleType.CenterCrop);
+        imgThumbail.SetPadding(8, 8, 8, 8);
 
+        viewHolder.DisplayName = itemView.FindViewById<TextView>(Resource.Id.tvDisplayName);
+        viewHolder.Thumbnail = imgThumbail;
+
+        itemView.Tag = viewHolder;
+      }
+
+      viewHolder.DisplayName.Text = item.DisplayName;
+      viewHolder.Thumbnail.SetImageResource(Resource.Drawable.Icon);
       return itemView;
     }
-
 
     public override long GetItemId(int position)
     {
