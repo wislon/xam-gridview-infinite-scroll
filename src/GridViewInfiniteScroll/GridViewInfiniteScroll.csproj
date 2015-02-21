@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="MyGridViewAdapter.cs" />
+    <Compile Include="MySimpleItemViewHolder.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MySimpleItem.cs" />
