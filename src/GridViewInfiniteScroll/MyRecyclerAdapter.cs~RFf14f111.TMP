@@ -18,30 +18,23 @@ namespace GridViewInfiniteScroll
       throw new System.NotImplementedException();
     }
 
-    /// <summary>
-    /// This lets you look at the viewType value you set in the  GetItemViewType
-    /// method, and use that to determine what kind of viewholder you want to create.
-    /// </summary>
-    /// <param name="parent"></param>
-    /// <param name="viewType"></param>
-    /// <returns></returns>
     public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
     {
-      var layoutInflater = LayoutInflater.From(parent.Context);
+            var layoutInflater = LayoutInflater.From(parent.Context);
 
-      switch (viewType)
-      {
-        case 0:
-          {
-            var view = layoutInflater.Inflate(Resource.Layout.MyGridViewCell, parent, false);
-            var viewHolder = new MySimpleItemViewHolder(view);
-            return viewHolder;
-          }
-        default:
-          {
-            return null; // this may cause you to crash if there's a type in your list you forgot about...
-          }
-      }
+            switch (viewType)
+            {
+                case 0:
+                    {
+                        var view = layoutInflater.Inflate(Resource.Layout.MyGridViewCell, parent, false);
+                        var viewHolder = new MySimpleItemViewHolder();
+                        return viewHolder;
+                    }
+              default:
+              {
+                return null;
+              }
+            }
     }
 
     /// <summary>
@@ -54,9 +47,9 @@ namespace GridViewInfiniteScroll
     /// <returns></returns>
     public override int GetItemViewType(int position)
     {
-      if (_mySimpleItemLoader.MySimpleItems[position].GetType() == typeof(MySimpleItem))
+      if (_mySimpleItemLoader.MySimpleItems[position].GetType() == typeof (MySimpleItem))
       {
-        return 0;
+        return 0; 
       }
       return 0;
     }
