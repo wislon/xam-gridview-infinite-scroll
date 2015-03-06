@@ -1,7 +1,9 @@
 ﻿using Android.App;
+using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Widget;
 using Android.OS;
+using Java.Nio.Channels;
 
 namespace GridViewInfiniteScroll
 {
@@ -10,12 +12,12 @@ namespace GridViewInfiniteScroll
   {
     private const string TAG = "InfiniteScroll";
 
-    private GridView _gridView;
     private MySimpleItemLoader _mySimpleItemLoader;
-    private MyGridViewAdapter _gridviewAdapter;
     private readonly object _scrollLockObject = new object();
+    private RecyclerView _recyclerView;
+    private MyRecyclerAdapter _myRecyclerAdapter;
+    
     private const int ItemsPerPage = 24;
-
 
     private const int LoadNextItemsThreshold = 6;
 
@@ -31,29 +33,16 @@ namespace GridViewInfiniteScroll
     private void SetupUiElements()
     {
       _mySimpleItemLoader = new MySimpleItemLoader();
-      _mySimpleItemLoader.LoadMoreItems(ItemsPerPage); 
+      _mySimpleItemLoader.LoadMoreItems(ItemsPerPage);
 
-      _gridView = FindViewById<GridView>(Resource.Id.gridView);
-      _gridviewAdapter = new MyGridViewAdapter(this, _mySimpleItemLoader);
-      _gridView.Adapter = _gridviewAdapter;
-      _gridView.Scroll += KeepScrollingInfinitely;
+      _myRecyclerAdapter = new MyRecyclerAdapter(_mySimpleItemLoader);
+      _recyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerGridView);
+      var sglm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.Vertical);
+
+      _recyclerView.SetLayoutManager(sglm);
+      _recyclerView.SetAdapter(_myRecyclerAdapter);
     }
 
-    private void KeepScrollingInfinitely(object sender, AbsListView.ScrollEventArgs args)
-    {
-      lock (_scrollLockObject)
-      {
-        var mustLoadMore = args.FirstVisibleItem + args.VisibleItemCount >= args.TotalItemCount - LoadNextItemsThreshold;
-        if (mustLoadMore && _mySimpleItemLoader.CanLoadMoreItems && !_mySimpleItemLoader.IsBusy)
-        {
-          _mySimpleItemLoader.IsBusy = true;
-          Log.Info(TAG, "Requested to load more items");
-          _mySimpleItemLoader.LoadMoreItems(ItemsPerPage);
-          _gridviewAdapter.NotifyDataSetChanged();
-          _gridView.InvalidateViews();
-        }
-      }
-    }
   }
 }
 
