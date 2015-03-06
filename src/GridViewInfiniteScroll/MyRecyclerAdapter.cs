@@ -15,8 +15,20 @@ namespace GridViewInfiniteScroll
 
     public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
     {
-      throw new System.NotImplementedException();
+      var gridItem = _mySimpleItemLoader.MySimpleItems[position];
+
+      // you could also put an 'item type' enum field or property in your data item and do a 'switch/case' on that...
+      if (holder.GetType() == typeof(MySimpleItemViewHolder))
+      {
+        var viewHolder = holder as MySimpleItemViewHolder;
+        if (viewHolder != null)
+        {
+          viewHolder.DisplayName.Text = gridItem.DisplayName;
+          viewHolder.Thumbnail.SetImageResource(Resource.Drawable.Icon);
+        }
+      }
     }
+
 
     /// <summary>
     /// This lets you look at the viewType value you set in the  GetItemViewType
@@ -60,6 +72,8 @@ namespace GridViewInfiniteScroll
       }
       return 0;
     }
+
+
 
     public override int ItemCount
     {
