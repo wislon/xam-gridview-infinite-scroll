@@ -60,11 +60,11 @@ namespace GridViewInfiniteScroll
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int gridView = 2131034112;
-			
 			// aapt resource value: 0x7f050001
 			public const int imgThumbnail = 2131034113;
+			
+			// aapt resource value: 0x7f050000
+			public const int recyclerGridView = 2131034112;
 			
 			// aapt resource value: 0x7f050002
 			public const int tvDisplayName = 2131034114;

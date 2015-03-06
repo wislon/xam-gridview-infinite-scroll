@@ -5,21 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
-    <GridView
-        android:id="@+id/gridView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:columnWidth="170dp"
-        android:gravity="center"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="5dp"
-        android:clipChildren="true"
-        android:drawSelectorOnTop="true"
-        android:stretchMode="columnWidth" 
-        android:background="#020202"
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/recyclerGridView"
+      android:scrollbars="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:verticalSpacing="8dp"
         >
-    </GridView>
+  </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
