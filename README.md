@@ -1,4 +1,4 @@
-### Xamarin.Android Staggered Grid view with Infinite Scrolling Example
+### Xamarin.Android Staggered Grid View, with Infinite Scrolling example
 
 I did a blog post about this one at [http://blog.wislon.io/posts/2015/03/05/xamarin-android-staggered-grid-layout/](http://blog.wislon.io/posts/2015/03/05/xamarin-android-staggered-grid-layout/)
 
