@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
-    <Compile Include="MyGridViewAdapter.cs" />
     <Compile Include="MyRecyclerAdapter.cs">
       <SubType>Code</SubType>
     </Compile>

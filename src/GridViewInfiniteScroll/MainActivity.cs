@@ -1,9 +1,6 @@
 ﻿using Android.App;
 using Android.Support.V7.Widget;
-using Android.Util;
-using Android.Widget;
 using Android.OS;
-using Java.Nio.Channels;
 
 namespace GridViewInfiniteScroll
 {
