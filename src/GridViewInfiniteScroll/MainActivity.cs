@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.Support.V7.Widget;
 using Android.OS;
+using Android.Util;
+using Android.Widget;
 
 namespace GridViewInfiniteScroll
 {
@@ -13,7 +15,8 @@ namespace GridViewInfiniteScroll
     private readonly object _scrollLockObject = new object();
     private RecyclerView _recyclerView;
     private MyRecyclerAdapter _myRecyclerAdapter;
-    
+    private InfiniteScrollListener _infiniteScrollListener;
+
     private const int ItemsPerPage = 24;
 
     private const int LoadNextItemsThreshold = 6;
@@ -38,7 +41,26 @@ namespace GridViewInfiniteScroll
 
       _recyclerView.SetLayoutManager(sglm);
       _recyclerView.SetAdapter(_myRecyclerAdapter);
+
+      _infiniteScrollListener = new InfiniteScrollListener(_mySimpleItemLoader, 
+                                                           _myRecyclerAdapter, 
+                                                           sglm, 
+                                                           ItemsPerPage, 
+                                                           this.UpdateDataAdapter);
+
+      _recyclerView.SetOnScrollListener(_infiniteScrollListener);
     }
+
+    private void UpdateDataAdapter()
+    {
+      int count = _mySimpleItemLoader.MySimpleItems.Count;
+      Toast.MakeText(this, string.Format("{0} items", count), ToastLength.Short).Show();
+      if (count > 0)
+      {
+        _myRecyclerAdapter.NotifyDataSetChanged();
+      }
+    }
+
 
   }
 }
